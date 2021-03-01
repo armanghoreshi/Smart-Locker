@@ -12,4 +12,8 @@ This was a project for Internet of Things(IoT) course at Ferdowsi University to 
 <b>System Architecture:</b>
 <img style="width:90%" src="https://github.com/armanghoreshi/Smart-Locker/blob/main/images/architecture.png">
 
+Checkout the <a href="">project report</a> !
+
 Checkout our <a href="https://github.com/armanghoreshi/Smart-Locker/tree/main/diagrams">diagrams</a> (<a href="https://github.com/armanghoreshi/Smart-Locker/blob/main/diagrams/iot-usecase-diagram.jpg">Usecase</a>, <a href="https://github.com/armanghoreshi/Smart-Locker/blob/main/diagrams/iot-dbRelation.png">DB relation</a>, <a href="https://github.com/armanghoreshi/Smart-Locker/blob/main/diagrams/iot-deploy.vpd.pdf">Deployment</a>, <a href="https://github.com/armanghoreshi/Smart-Locker/blob/main/diagrams/iot-Hardware-2.pdf">Hardware schema</a>) !
+
+Checkout our <a href="https://drive.google.com/file/d/1q5JWDN8pIffbIn-yse5ijv3Wo941eBq3/view?usp=sharing">demo video</a> !
