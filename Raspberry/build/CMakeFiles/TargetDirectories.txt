@@ -1,0 +1,3 @@
+/home/pi/Project/build/CMakeFiles/rebuild_cache.dir
+/home/pi/Project/build/CMakeFiles/IoT.dir
+/home/pi/Project/build/CMakeFiles/edit_cache.dir
