@@ -10,4 +10,4 @@ A smart locker system (architecture, design, and implementation) which is a resu
 This was a project for Internet of Things(IoT) course at Ferdowsi University to develop a Smart Campus. Managing lockers and keys at campus requires staff but with help of an automated locker system, it is easier to reserve and manage lockers at the campus level. We came up with the idea and started designing the infrastructure, choosing the right technology, and putting pieces of the puzzle together.
 
 <b>System Architecture:</b>
-<img href="/images/architecture.png">
+<img style="width 90%" href="https://github.com/armanghoreshi/Smart-Locker/blob/main/images/architecture.png">
