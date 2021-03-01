@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Smart Locker</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+  <script>
+    function signout() {
+      sessionStorage.removeItem('token');
+    }
+  </script>
+
+
+  <script>
+    var token = sessionStorage.getItem("token");
+    console.log(token);
+  </script>
+  
+
+  <script type="text/javascript">
+    var stateURL = 'http://5.160.146.108:8080/locker/status'
+
+    $.ajax({
+      url: stateURL,
+      headers: {
+        'token': token
+      },
+      success: function (result) {
+
+        var closeic = document.getElementById("closeic");
+        var openic = document.getElementById("openic");
+        var unlock = document.getElementById("unlock");
+        var ret = document.getElementById("ret");
+        var book = document.getElementById("book");
+        var lockerid = document.getElementById("book");
+        book.style.display = "none";
+        closeic.style.display = "none";
+        openic.style.display = "none";
+        unlock.style.display = "none";
+        ret.style.display = "none";
+        if (result.status == "NoLockerFound") {
+          lockerid = "No Locker Has Been Booked"
+          book.style.display = "block";
+          closeic.style.display = "none";
+          openic.style.display = "none";
+          unlock.style.display = "none";
+          ret.style.display = "none";
+
+        }
+        else{
+        if (result.status == "CLOSE") {
+          lockerid = ""
+          book.style.display = "none";
+          closeic.style.display = "block";
+          openic.style.display = "none";
+          unlock.style.display = "block";
+          ret.style.display = "block";
+
+        }
+        if (result.status == "OPEN") {
+          lockerid = ""
+          book.style.display = "none";
+          closeic.style.display = "none";
+          openic.style.display = "none";
+          unlock.style.display = "block";
+          ret.style.display = "block";
+        }
+      }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        alert('Error: ' + textStatus + ' - ' + errorThrown);
+      }
+    });
+
+  </script>
+
+
+<script type="text/javascript">
+function unl(){
+  var stateURL = 'http://5.160.146.108:8080/locker/open'
+
+  $.ajax({
+    url: stateURL,
+    dataType: 'json',
+                type: 'put',
+    headers: {
+      'token': token
+    },
+    success: function (result) {
+      console.log(result.status)
+      var closeic = document.getElementById("closeic");
+      var openic = document.getElementById("openic");
+      var unlock = document.getElementById("unlock");
+      var ret = document.getElementById("ret");
+      var book = document.getElementById("book");
+
+      if(result.reason == "hardware failure"){
+        
+        document.getElementById("lockerid").innerHTML =lockerid + "<br>" + "Hardware Failure"
+        // book.style.display = "none";
+        // closeic.style.display = "none";
+        // openic.style.display = "block";
+        // unlock.style.display = "none";
+        // ret.style.display = "block";
+      }
+      else{if(result.status == true){
+        document.getElementById("lockerid").innerHTML = lockerid
+        book.style.display = "none";
+        closeic.style.display = "none";
+        openic.style.display = "block";
+        unlock.style.display = "none";
+        ret.style.display = "block";
+      }}
+    
+    
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      alert('Error: ' + textStatus + ' - ' + errorThrown);
+    }
+  });
+}
+</script>
+
+  <script type="text/javascript">
+    var stateURL = 'http://5.160.146.108:8080/user/info'
+
+    $.ajax({
+      url: stateURL,
+      headers: {
+        'token': token
+      },
+      success: function (result) {
+        console.log(result)
+        document.getElementById("username").innerHTML = "Username : " +result.username
+        document.getElementById("nickname").innerHTML = "Nickname : " +result.nickName
+        document.getElementById("email").innerHTML = "Email : " +result.email
+        document.getElementById("signUpAt").innerHTML = "Sign Up At : " +result.signUpAt
+        document.getElementById("lastLoginAt").innerHTML = "Last Login At : " +result.lastLoginAt
+        if (result.credit < 100) {
+          document.getElementById("credit").style.display = "none"
+          document.getElementById("dancredit").innerHTML = "Credit : " +result.credit
+
+        }
+        else{
+        document.getElementById("dancredit").style.display = "none"
+        document.getElementById("credit").innerHTML = "Credit : " +result.credit
+        }
+        if(result.currentLocker != null){
+        lockerid = result.currentLocker.id
+        }
+        else{
+          lockerid = "No Lockerd"
+        }
+        document.getElementById("lockerid").innerHTML = lockerid
+      
+
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        alert('Error: ' + textStatus + ' - ' + errorThrown);
+      }
+    });
+
+  </script>
+
+
+
+
+  <script>
+    var token = sessionStorage.getItem("token");
+    console.log(token);
+  </script>
+
+  <script type="text/javascript">
+    function take() {
+      var myURL = 'http://5.160.146.108:8080/locker/take'
+      $.ajax({
+        url: myURL,
+        dataType: 'json',
+        type: 'post',
+        headers: {
+          'token': token
+        },
+        success: function (result) {
+          console.log(result)
+          console.log(result)
+          location.reload()
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          alert('Error: ' + textStatus + ' - ' + errorThrown);
+        }
+      });
+    }
+  </script>
+
+<script type="text/javascript">
+  function ret() {
+    var myURL = 'http://5.160.146.108:8080/locker/return'
+    $.ajax({
+      url: myURL,
+      dataType: 'json',
+      type: 'put',
+      headers: {
+        'token': token
+      },
+      success: function (result) {
+        console.log(result.status)
+        location.reload()
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        alert('Error: ' + textStatus + ' - ' + errorThrown);
+      }
+    });
+  }
+</script>
+
+</head>
+
+<body>
+  <div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>FUM Smart Locker </h1>
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-justified ">
+    <ul class="nav nav-pills ">
+
+
+      <a class="btn btn-primary btn-lg btn-block" onclick="signout();" href="./../Login/login.html" href="#">Sign
+        Out</a>
+      </li>
+    </ul>
+  </nav>
+
+
+
+  <div class="container" style="margin-bottom:30px;">
+    <div class="row" style="margin-top:30px;justify-content: center;">
+      <div class="col-sm-4">
+        <h3>Locker ID</h3>
+        <h5 style="margin-bottom:30px; " id="lockerid"> </h5>
+        <div class="col-sm-12 text-center " style="padding-bottom: 20px;">
+          <svg class="bi bi-lock" id="closeic" width="15em" height="15em" viewBox="0 0 16 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
+          </svg>
+          <svg class="bi bi-unlock" id="openic" width="15em" height="15em" viewBox="0 0 16 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M9.655 8H2.333c-.264 0-.398.068-.471.121a.73.73 0 0 0-.224.296 1.626 1.626 0 0 0-.138.59V14c0 .342.076.531.14.635.064.106.151.18.256.237a1.122 1.122 0 0 0 .436.127l.013.001h7.322c.264 0 .398-.068.471-.121a.73.73 0 0 0 .224-.296 1.627 1.627 0 0 0 .138-.59V9c0-.342-.076-.531-.14-.635a.658.658 0 0 0-.255-.237A1.122 1.122 0 0 0 9.655 8zm.012-1H2.333C.5 7 .5 9 .5 9v5c0 2 1.833 2 1.833 2h7.334c1.833 0 1.833-2 1.833-2V9c0-2-1.833-2-1.833-2zM8.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z" />
+          </svg>
+        </div>
+        <button type="button" class="btn btn-primary btn-lg btn-block " onclick="unl();return false" id="unlock"> Unlock </button>
+        <button type="button" class="btn btn-primary btn-lg btn-block " style="margin-bottom: 2%;" onclick= "ret();return false;" id="ret"> Return Locker </button>
+        <button type="button" class="btn btn-primary btn-lg btn-block " onclick="take();return false" id="book">Book
+          Locker </button>
+
+      </div>
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-6">
+        <h3>Account</h3>
+        <h5 style="margin-bottom:30px; " id="userinfo"> </h5>
+        <div class="col-sm-12 text-center " style="padding-bottom: 20px;">
+          <span class="bg-secondary text-white btn-block " style="padding: .375rem .75rem;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        border-radius: .25rem;" id="username"></span>
+        </div>
+        <div class="col-sm-12 text-center " style="padding-bottom: 20px;">
+
+          <span class="bg-secondary text-white btn-block" style="padding: .375rem .75rem;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        border-radius: .25rem;" id="nickname"></span>
+        </div>
+        <div class="col-sm-12 text-center " style="padding-bottom: 20px;">
+
+          <span class="bg-secondary text-white btn-block" style="padding: .375rem .75rem;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        border-radius: .25rem;" id="email"></span>
+        </div>
+        <div class="col-sm-12 text-center " style="padding-bottom: 20px;">
+
+          <span class="bg-secondary text-white btn-block" style="padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;" id="signUpAt"></span>
+        </div>
+        <div class="col-sm-12 text-center " style="padding-bottom: 20px;">
+
+          <span class="bg-secondary text-white btn-block" style="padding: .375rem .75rem;font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;" id="lastLoginAt"></span>
+        </div>
+        
+
+
+          <div class="col-sm-12 text-center " style="padding-bottom: 20px;">
+
+            <span class="bg-secondary text-white btn-block" style="padding: .375rem .75rem;
+        font-size: 1.5rem;
+        line-height: 1.5;
+        border-radius: .25rem;" id="credit"></span>
+          </div>
+
+          <div class="col-sm-12 text-center " style="padding-bottom: 20px;">
+
+            <span class="bg-danger text-white btn-block" style="padding: .375rem .75rem;
+        font-size: 1.5rem;
+        line-height: 1.5;
+        border-radius: .25rem;" id="dancredit"></span>
+          </div>
+
+
+
+          <!-- 
+        <table class="table table-bordered  table-responsive  " id="warning"></table>
+      </div> -->
+        </div>
+
+
+
+      </div>
+
+
+      <div class="jumbotron text-center" style="margin-bottom:0px;">
+      </div>
+
+</body>
+
+</html>

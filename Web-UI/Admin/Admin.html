@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Admin Panel</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+  <script>
+    var token = sessionStorage.getItem("token");
+    console.log(token);
+  </script>
+  <script type="text/javascript">
+    var myURL = 'http://5.160.146.108:8080/locker/info'
+    //var myURL = '5.160.146.108:8080/locker/info'
+
+    $.ajax({
+      url: myURL,
+      dataType: 'json',
+      headers: {
+        'token': token
+      },
+      success: function (data) {
+        var table = "<th>ID</th><th> Status </th><th> Owner </th>";
+
+        for (var i = 0; i < data.lockersInfo.length; i++) {
+          table += "<tr><td>" +
+            data.lockersInfo[i].id
+          if (data.lockersInfo[i].status == "CLOSE") {
+            table += "</td><td class=table-success>" +
+              data.lockersInfo[i].status;
+          }
+          else {
+            table += "</td><td class=table-danger >" +
+              data.lockersInfo[i].status;
+          }
+          if (data.lockersInfo[i].ownerInfo != null) {
+            table += "</td><td>" +
+              data.lockersInfo[i].ownerInfo.username;
+          }
+          else
+            table += "</td ><td class=table-secondary > NOT RESERVED"
+        }
+        document.getElementById("overall").innerHTML = table;
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        alert('Error: ' + textStatus + ' - ' + errorThrown);
+      }
+    });
+  </script>
+
+  <script type="text/javascript">
+    var token = sessionStorage.getItem("token");
+    var myURL = 'http://5.160.146.108:8080/warning'
+    //var myURL = '5.160.146.108:8080/warning'
+
+    $.ajax({
+      url: myURL,
+      dataType: 'json',
+      headers: {
+        'token': token
+      },
+      success: function (data) {
+
+        if (data.warnings.length == 0) {
+          document.getElementById("warningStatus").innerHTML = "NO Warning"
+        }
+        var table = "<th> ID</th><th>Message</th><th> Username </th><th> Email </th><th> Time </th>";
+
+        for (var i = 0; i < data.warnings.length; i++) {
+          table += "</tr ><td>" +
+            data.warnings[i].lockerInfo.id
+          if (data.warnings[i].type == "UNEXPECTED_OPENING") {
+            table += "</td><td class=table-danger>" +
+              data.warnings[i].type;
+          }
+
+          if (data.warnings[i].type == "LOCKER_UNUSED") {
+            table += "</td><td class=table-dark>" +
+              data.warnings[i].type;
+          }
+          if (data.warnings[i].type == "NO_CREDIT") {
+            table += "</td><td class=table-warning>" +
+              data.warnings[i].type;
+
+          }
+          if (data.warnings[i].userInfo != null) {
+            table += "</td><td>" +
+              data.warnings[i].userInfo.username;
+          }
+          else {
+            table += "</td><td class=table-secondary > NOT RESERVED"
+          }
+          table += "</td><td>" +
+            data.warnings[i].userInfo.email;
+
+
+          table +=
+            "</td ><td>" +
+            data.warnings[0].time
+        }
+        document.getElementById("warning").innerHTML = table;
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        alert('Error: ' + textStatus + ' - ' + errorThrown);
+      }
+    });
+  </script>
+  <script>
+    function signout() {
+      sessionStorage.removeItem('token');
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>FUM Smart Locker </h1>
+    <h3>Admin Panel </h3>
+
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-justified ">
+    <ul class="nav nav-pills ">
+
+      <li class="nav-item dropdown ">
+
+        <a class="nav-link dropdowntoggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+          aria-expanded="false">
+          <svg class="bi bi-justify" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M2 12.5a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5z"
+              clip-rule="evenodd" />
+          </svg>
+          Menu
+        </a>
+        <div class="dropdown-menu ">
+          <a class=" dropdown-item active" href="#">Dashboard</a>
+          <a class="dropdown-item" href="./LogAdmin.html">Logs</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" onclick="signout();" href="./../Login/login.html">Sign Out</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container" style="margin-bottom:30px;">
+    <div class="row" style="margin-top:30px;justify-content: center;">
+      <div class="col-sm-5">
+        <h3>Overall Status</h3>
+        <table class="table table-bordered " style="margin: 0;" id="overall"></table>
+      </div>
+      <div class="col-sm-7">
+        <h3>Warnings</h3>
+        <h5 id="warningStatus"> </h5>
+
+        <table class="table table-bordered  table-responsive  " id="warning"></table>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div class="jumbotron text-center" style="margin-bottom:0px;">
+  </div>
+
+</body>
+
+</html>

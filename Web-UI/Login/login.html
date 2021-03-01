@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Smart Locker</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript">
+        function sign() {
+            console.log('hi')
+            var URL = 'http://5.160.146.108:8080/user/sign_up';
+            //var URL = '5.160.146.108:8080/user/sign_up';
+
+            console.log(URL)
+            $.ajax({
+                url: URL,
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "nickname": document.getElementById("nikname").value,
+                    "email": document.getElementById("email").value,
+                    "username": document.getElementById("suser").value,
+                    "password": document.getElementById("spass").value
+                }),
+                success: function (result) {
+                    console.log(result)
+                    var admin = false
+                    if (admin) { }
+                    else {
+                        token = result.token;
+                        sessionStorage.setItem('token', result.token);
+                        window.location.href = "./../User/Dashboard.html";
+                    }
+                }
+                ,
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                    console.log('no')
+
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function login() {
+            var token
+            console.log('hi')
+            var URL = 'http://5.160.146.108:8080/user/login';
+            //var URL = '5.160.146.108:8080/user/login';
+
+            console.log(URL)
+            $.ajax({
+                url: URL,
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "username": document.getElementById("luser").value,
+                    "password": document.getElementById("lpass").value
+                }),
+                success: function (result) {
+                    if (result.status = "OK") {
+                        token = result.token;
+                            sessionStorage.setItem('token', result.token);
+                        if (document.getElementById("luser").value == "admin") {
+                            token = result.token;
+                            sessionStorage.setItem('token', result.token);
+                            console.log(token)
+
+                            window.location.href = "./../Admin/Admin.html";
+                        }
+                        else {
+                            console.log(token)
+                            window.location.href = "./../User/Dashboard.html";
+                        }
+                    }
+                }
+                ,
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                    console.log('no')
+
+                }
+            });
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>FUM Smart Locker </h1>
+
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-justified ">
+        <ul class="nav nav-pills" style="visibility: hidden ">
+
+            <li class="nav-item dropdown ">
+
+                <a class="nav-link dropdowntoggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <svg class="bi bi-justify" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M2 12.5a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Menu
+                </a>
+                <div class="dropdown-menu ">
+                    <a class=" dropdown-item active" href="#">Dashboard</a>
+                    <a class="dropdown-item" href="#">Account</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Sign Out</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+
+
+    <div class="container" style="margin-bottom:30px;">
+        <div class="row text-center" style="margin-top:30px;justify-content: center;">
+            <div class="col-sm-5 jumbotron " style="padding: 0% 7% 5% 7%; ">
+                <h4 style=" margin: 10% 0 5% 0;"> Login </h4>
+
+                <div class="card text-left">
+                    <article class="card-body">
+
+                        <form>
+                            <div class="form-group" style="margin:10% 0 10% 0; ">
+                                <label>Username</label>
+                                <input name="" class="form-control" id="luser" placeholder="Username">
+                            </div> <!-- form-group// -->
+                            <div class="form-group" style="margin:0 0 30% 0; ">
+                                <label>Your password</label>
+                                <input class="form-control" placeholder="******" id="lpass" type="password">
+                            </div> <!-- form-group// -->
+
+                            <div class="form-group" style="margin:0 0 15% 0; ">
+                                <button type="submit" class="btn btn-primary btn-block"
+                                    onclick="login(); return false;"> Login </button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </article>
+
+                </div>
+
+            </div>
+            <div class="col-sm-1 ">
+            </div>
+            <div class="col-sm-5 jumbotron " style="padding: 0% 7% 5% 7%; ">
+                <h4 style=" margin: 10% 0 5% 0;"> Sign Up </h4>
+
+                <div class="card text-left">
+                    <article class="card-body">
+
+                        <form>
+                            <div class="form-group" style="margin:10% 0 7% 0; ">
+                                <label>Username</label>
+                                <input name="" class="form-control" id="suser" placeholder="Username">
+                            </div> <!-- form-group// -->
+                            <div class="form-group" style="margin:0 0 7% 0; ">
+                                <label>Nickname</label>
+                                <input class="form-control" id="nikname" placeholder="Nickname">
+
+                            </div> <!-- form-group// -->
+                            <div class="form-group" style="margin:0 0 7% 0; ">
+                                <label>Email</label>
+                                <input class="form-control" id="email" placeholder="Email" type="email">
+
+                            </div> <!-- form-group// -->
+
+                            <div class="form-group" style="margin:0 0 30% 0; ">
+                                <label>Choose Password</label>
+                                <input class="form-control" id="spass" placeholder="******" type="password">
+                            </div> <!-- form-group// -->
+                            <div class="form-group" style="margin:0 0 15% 0; ">
+                                <button type="submit" class="btn btn-primary btn-block" onclick="sign(); return false;">
+                                    Sign Up </button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </article>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron text-center" style="margin-bottom:0px;">
+    </div>
+
+</body>
+
+</html>

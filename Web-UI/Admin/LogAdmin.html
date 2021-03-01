@@ -1,0 +1,280 @@
+<html lang="en">
+
+<head>
+
+    <title>Admin Panel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+    <script>
+        function signout() {
+            sessionStorage.removeItem('token');
+        }
+    </script>
+    <script>
+        var token = sessionStorage.getItem("token");
+        console.log(token);
+    </script>
+    <script type="text/javascript">
+        function usersearch() {
+            var geturl = 'http://5.160.146.108:8080/user/search?username=' + document.getElementById("userID").value
+            //var geturl = '5.160.146.108:8080/user/search?username=' + document.getElementById("userID").value
+
+            console.log(geturl)
+            $.ajax({
+                url: geturl,
+                dataType: 'json',
+                headers: {
+                    'token': token
+                },
+                success: function (user) {
+                    var table = "<thead><tr><<th>Locker ID</th><th>Action</th>><th> Time</th></tr></thead>";
+                    console.log(user)
+                    var info = user.userHistoryInfos
+                    console.log(info)
+                    var usernolog = ""
+                    var email = ""
+
+                    if (user.email != null) {
+                        email = "<br>" + "Email : " + user.email
+                        console.log(user.email)
+                        console.log(email)
+                        console.log(usernolog)
+                    }
+                    if (info.length == 0) {
+                        usernolog = " Have No Log"
+                        console.log(usernolog)
+                        document.getElementById("loginfo").innerHTML = "";
+                    }
+
+                    else {
+                        for (i = 0; i < info.length; i++) {
+
+                            table += "<tbody><tr><td>" +
+                                info[i].userLockerInfo.lockerId +
+                                "</td><td>" +
+                                info[i].action +
+                                "</td><td>" +
+                                info[i].time +
+                                "</td></tr></tbody>";
+                        }
+                        document.getElementById("loginfo").innerHTML = table;
+
+                    }
+
+                    document.getElementById("id").innerHTML = "Username : " + user.username + "<br>" + "User ID : " + user.id + email + usernolog;
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error: ' + textStatus + ' - ' + errorThrown);
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function locksearch() {
+            var geturl = 'http://5.160.146.108:8080/locker/' + document.getElementById("lockerID").value + '/info'
+            //var geturl = '5.160.146.108:8080/locker/' + document.getElementById("lockerID").value + '/info'
+
+            $.ajax({
+                url: geturl,
+                dataType: 'json',
+                headers: {
+                    'token': token
+                },
+                success: function (locker) {
+                    console.log(locker)
+                    console.log(locker)
+
+                    console.log(locker)
+                    var info = locker.locketHistoryInfos
+                    var owner = "Locker Is Open To Book";
+                    if (locker.currentOwner != null) {
+                        owner = locker.currentOwner.username;
+                    }
+                    if (info.length == 0) {
+                        var nolog = " Have No Log"
+                    }
+                    else {
+                        var nolog = ""
+                        var table = "  <thead><tr><<th>Action</th><th>User ID</th><th>User Name</th><th> Time</th></tr> </thead>";
+                        for (i = 0; i < info.length; i++) {
+                            if(info[i].userInfo != null){
+                            table += "  <tbody><tr><td>" +
+                                info[i].action +
+                                "</td><td>" +
+                                info[i].userInfo.userId +
+                                "</td><td>" +
+                                info[i].userInfo.username +
+                                "</td><td>" +
+                                info[i].time +
+                                "</td></tr>  </tbody>";
+                        }}
+                        document.getElementById("loginfo").innerHTML = table;
+
+                    }
+                    document.getElementById("id").innerHTML = "Locker ID : " + locker.lockerId + nolog + "<br> Current Owner : " + owner;
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error: ' + textStatus + ' - ' + errorThrown);
+                }
+            });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        function by() {
+            console.log('hi')
+            id = document.getElementById("openid").value
+            var URL = 'http://5.160.146.108:8080/locker/' + id + '/open';
+            // var URL = '5.160.146.108:8080/locker/' + id + '/open';
+
+            console.log(URL)
+
+            $.ajax({
+                url: URL,
+                type: 'PUT',
+                headers: {
+                    'token': token
+                },
+                success: function (result) {
+                    console.log(result)
+                    console.log('ok')
+                    if(result.status == true){
+                    document.getElementById("id").innerHTML = "Locker ID : " + id + " is Open Now.";
+                    document.getElementById("loginfo").innerHTML = ""}
+                    else{
+                        document.getElementById("id").innerHTML = result.reason;
+                    document.getElementById("loginfo").innerHTML = ""
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('no')
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- <button type="submit" class="btn btn-primary mb-2" onclick="locksearch()"> Search!</button> -->
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1>FUM Smart Locker </h1>
+        <h3>Admin Panel </h3>
+
+    </div>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-justified ">
+        <ul class="nav nav-pills ">
+
+            <li class="nav-item dropdown ">
+
+                <a class="nav-link dropdowntoggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <svg class="bi bi-justify" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M2 12.5a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Menu
+                </a>
+                <div class="dropdown-menu ">
+                    <a class=" dropdown-item " href="./Admin.html">Dashboard</a>
+                    <a class="dropdown-item active" href="#">Logs </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" onclick="signout();" href="./../Login/login.html">Sign Out</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container" style="margin-bottom:30px;">
+        <h3 style="margin:10px 0 0 0;" id="id"></h3>
+
+        <div class="row " style="margin-top:30px;">
+            <table class="table table-bordered  " id="loginfo"></table>
+            <div class="col-sm-3 jumbotron" style="padding: 1rem 1rem 2rem 1rem;">
+                <h5 style=" margin: 10% 0 5% 5px;"> User Log </h5>
+                <div class="card text-left">
+
+                    <article class="card-body ">
+                        <form class="form d-block">
+                            <div class="form-group ">
+                                <input class="form-control" id="userID" placeholder="USER ID">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block"
+                                onclick="usersearch();return false;">Search!</button>
+
+                        </form>
+                    </article>
+                </div>
+
+            </div>
+            <div class="col-sm-1 "></div>
+
+            <div class="col-sm-3 jumbotron" style="padding: 1rem 1rem 2rem 1rem;">
+                <h5 style=" margin: 10% 0 5% 5px;"> Locker History </h5>
+                <div class="card text-left">
+
+                    <article class="card-body  ">
+
+                        <form class="form d-block">
+                            <div class="form-group">
+                                <input class="form-control" id="lockerID" name="lid" placeholder="LOCKER ID">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block"
+                                onclick="locksearch();return false;">Search!</button>
+                        </form>
+                    </article>
+                </div>
+            </div>
+            <div class="col-sm-1 "></div>
+
+            <div class="col-sm-3 jumbotron" style="padding: 1rem 1rem 2rem 1rem;">
+                <h5 style=" margin: 10% 0 5% 5px;"> Open Locker </h5>
+
+                <div class="card text-left">
+
+                    <article class="card-body ">
+
+                        <form class="form d-block">
+                            <div class="form-group">
+                                <input class="form-control" id="openid" placeholder="LOCKER ID">
+
+                            </div>
+                            <button type="submit" class="btn btn-danger btn-block"
+                                onclick="by();return false">Open!</button>
+
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+    </div>
+
+    <div class="jumbotron text-center" style="margin-bottom:0px;">
+    </div>
+
+</body>
+
+</html>
