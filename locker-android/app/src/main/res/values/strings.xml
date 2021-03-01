@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Smart Locker</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Lockers</string>
+    <string name="assessment">Profile</string>
+    <string name="account">account</string>
+    <string name="unlock">unlock</string>
+    <string name="locker">Locker</string>
+    <string name="creddit">Credit</string>
+    <string name="status">Status</string>
+    <string name="profile">Profile</string>
+    <string name="getLocker">get Locker</string>
+    <string name="returnLocker">return locker</string>
+    <string name="noLocker">_</string>
+    <string name="userName">Username</string>
+    <string name="nickName">Nickname</string>
+    <string name="email">Email address</string>
+    <string name="userName_label">Username:</string>
+    <string name="nickName_label">Nickname:</string>
+    <string name="sign_up_at_label">Sign up date:</string>
+    <string name="last_login_label">Last login:</string>
+    <string name="last_locker_modified_label">Last modified:</string>
+    <string name="register">Register</string>
+    <string name="pass">Password</string>
+    <string name="login">Login</string>
+    <string name="welcome">Welcome</string>
+    <string name="register_new_account">Register new account</string>
+</resources>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="userData"
+            type="com.example.locker.model.response.UserInfoResponseModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".features.AccountFragment"
+        android:background="@color/colorGreenDeactive">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_10x"
+            android:text="@string/profile"
+            android:textColor="@color/colorGreenUsed"
+            android:textSize="@dimen/spacing_8x"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_login"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="5dp"
+            android:layout_marginHorizontal="@dimen/spacing_5x"
+            android:layout_marginVertical="@dimen/spacing_20x"
+            android:elevation="20dp"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_profile"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_profile">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_username_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/userName_label"
+                    android:textColor="@color/colorPinkUsed"
+                    android:textSize="@dimen/spacing_4x"
+                    app:layout_constraintBottom_toTopOf="@id/tv_nickname_label"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userData.username}"
+                    android:textSize="@dimen/spacing_4x"
+                    app:layout_constraintBottom_toTopOf="@id/tv_nickname"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_username_label"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="homz" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_nickname_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nickName_label"
+                    android:textColor="@color/colorPinkUsed"
+                    android:textSize="@dimen/spacing_4x"
+                    app:layout_constraintBottom_toTopOf="@id/tv_sign_up_at_label"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_username" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userData.nickName}"
+                    android:textSize="@dimen/spacing_4x"
+                    app:layout_constraintBottom_toTopOf="@id/tv_sign_up_at"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_username_label"
+                    app:layout_constraintTop_toBottomOf="@id/tv_username"
+                    tools:text="homa joon" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_sign_up_at_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up_at_label"
+                    android:textColor="@color/colorPinkUsed"
+                    android:textSize="@dimen/spacing_4x"
+                    app:layout_constraintBottom_toTopOf="@id/tv_last_login_label"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nickname"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_sign_up_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userData.signUpAt}"
+                    android:textSize="@dimen/spacing_3x"
+                    app:layout_constraintBottom_toTopOf="@id/tv_last_login"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_username_label"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nickname"
+                    tools:text="99.1.3 " />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_last_login_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/last_login_label"
+                    android:textColor="@color/colorPinkUsed"
+                    android:textSize="@dimen/spacing_4x"
+                    app:layout_constraintBottom_toTopOf="@id/tv_last_modified_label"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sign_up_at" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_last_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userData.lastLoginAt}"
+                    android:textSize="@dimen/spacing_3x"
+                    app:layout_constraintBottom_toTopOf="@id/tv_last_modified"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_username_label"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sign_up_at"
+                    tools:text="23:15" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_last_modified_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/last_locker_modified_label"
+                    android:textColor="@color/colorPinkUsed"
+                    android:textSize="@dimen/spacing_4x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_last_login" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_last_modified"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userData.currentLocker.lastModified}"
+                    android:textSize="@dimen/spacing_3x"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_username_label"
+                    app:layout_constraintTop_toBottomOf="@id/tv_last_login"
+                    tools:text="ye time e" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    app:layout_constraintGuide_begin="185dp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

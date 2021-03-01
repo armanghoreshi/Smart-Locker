@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme color-->
+    <color name="colorPrimary">#141A1D</color>
+    <color name="colorPrimaryVariant">#0A0D0F</color>
+    <color name="colorSecondary">@color/colorTurquoise</color>
+    <color name="colorSecondaryVariant">@color/colorGreenDarker</color>
+    <color name="colorBackground">#DFFFDF</color>
+    <color name="colorSecondaryBackground">#CEFFCE</color>
+    <color name="colorSurface">#283439</color>
+    <color name="colorSurfaceDark">#222D32</color>
+    <color name="colorError">@color/colorRed</color>
+
+    <color name="colorOnPrimary">@color/colorWhite</color>
+    <color name="colorOnSecondary">@color/colorWhite</color>
+    <color name="colorOnBackground">@color/colorWhite</color>
+    <color name="colorOnSurface">@color/colorWhite</color>
+    <color name="colorOnError">@color/colorWhite</color>
+
+    <color name="colorTextPrimary">@color/colorWhite</color>
+    <color name="colorTextSecondary">@color/colorGray</color>
+    <color name="colorTextTurquoise">@color/colorTurquoise</color>
+    <!-- Dark theme END-->
+
+    <!-- Light theme color-->
+    <color name="colorPrimaryLight">@color/colorWhite</color>
+    <color name="colorPrimaryVariantLight">@color/colorWhite</color>
+    <color name="colorSecondaryLight">@color/colorTurquoise</color>
+    <color name="colorSecondaryVariantLight">@color/colorGreenDarker</color>
+    <color name="colorBackgroundLight">#f8f9fb</color>
+    <color name="colorSurfaceLight">@color/colorWhite</color>
+    <color name="colorSurfaceDarkLight">#fbfbfb</color>
+    <color name="colorErrorLight">@color/colorRedMedium</color>
+    <color name="colorAccentLight">@color/colorTurquoiseDark</color>
+
+    <color name="colorOnPrimaryLight">#3d4d55</color>
+    <color name="colorOnSecondaryLight">@color/colorWhite</color>
+    <color name="colorOnBackgroundLight">#3d4d55</color>
+    <color name="colorOnSurfaceLight">#3d4d55</color>
+    <color name="colorOnErrorLight">@color/colorWhite</color>
+
+    <color name="colorTextPrimaryLight">#3d4d55</color>
+    <color name="colorTextSecondaryLight">#3d4d55</color>
+    <color name="colorTextTurquoiseLight">@color/colorTurquoise</color>
+    <!-- Light theme END-->
+
+
+    <color name="colorListHeader">#2F3C43</color>
+    <color name="colorPositiveChange">@color/colorGreen</color>
+    <color name="colorNegativeChange">@color/colorRed</color>
+    <color name="colorUnchanged">@color/colorGray</color>
+    <color name="colorDisabled">@color/colorGrayDarker</color>
+    <color name="colorDivider">@color/colorGray</color>
+    <color name="colorGrid">@color/colorGrayAlpha30</color>
+
+    <color name="colorMunicipality">@color/colorFernGreen</color>
+    <color name="colorGovernment">@color/colorSlateBlue</color>
+    <color name="colorCompany">@color/colorSummerSky</color>
+
+    <color name="colorInstantUpdatePositive">@color/colorGreenAlpha25</color>
+    <color name="colorInstantUpdateNegative">#40FF1700</color>
+
+    <color name="colorGrayLight">#f0f7f7</color>
+    <color name="colorGray">#DEDEDE</color>
+    <color name="colorGrayMedium">#9ca2a5</color>
+    <color name="colorGrayAlpha25">#4090A4AE</color>
+    <color name="colorGrayAlpha30">#4D90A4AE</color>
+    <color name="colorGrayAlpha70">#B390A4AE</color>
+    <color name="colorGrayDarker">#5C6C74</color>
+    <color name="colorYellow">#FFB300</color>
+    <color name="colorRed">#FF5722</color>
+    <color name="colorRedMedium">#ff2e0a</color>
+    <color name="colorRedDark">#bf360c</color>
+    <color name="colorBlueDarker">#19393c</color>
+    <color name="colorGreen">#4CAF50</color>
+    <color name="colorGreenUsed">#009900</color>
+    <color name="colorPinkUsed">#F50057</color>
+    <color name="colorPinkUsedBackground"></color>
+    <color name="colorGreenMedium">#11b622</color>
+    <color name="colorGreenDarker">#00796B</color>
+    <color name="colorGreenTooDark">#1f3c3e</color>
+    <color name="colorGreenAlpha25">#404CAF50</color>
+    <color name="colorTurquoise">#00C8B5</color>
+    <color name="colorTurquoiseDark">#0097a7</color>
+    <color name="colorTurquoiseAlpha10">#1A00C8B5</color>
+    <color name="colorTurquoiseAlpha20">#3300C8B5</color>
+    <color name="colorTurquoiseAlpha40">#6600C8B5</color>
+    <color name="colorFernGreen">#66BB6A</color>
+    <color name="colorSummerSky">#42A5F5</color>
+    <color name="colorSlateBlue">#9575cd</color>
+    <color name="colorLilac">#ab47bc</color>
+    <color name="colorOrange">#ff9800</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteAlpha20">#33FFFFFF</color>
+    <color name="colorWhiteAlpha60">#99FFFFFF</color>
+    <color name="colorHistoryView">#59686F</color>
+
+    <color name="colorCeruleanBlue">#3949ab</color>
+    <color name="colorBlueGem">#4527a0</color>
+    <color name="colorMosque">#006064</color>
+    <color name="colorCeruleanBlueAlpha10">#1A30d2c3</color>
+    <color name="colorBlueGemAlpha10">#1A9575cd</color>
+    <color name="colorMosqueAlpha10">#1Aff9800</color>
+    <color name="colorSolitude">#E1E7F1</color>
+    <color name="colorLavender">#E2E3F0</color>
+    <color name="colorOysterBay">#DCEBEB</color>
+
+
+    <color name="colorWildBlueYonder">#7986cb</color>
+    <color name="colorGreenFruitSalad">#43a047</color>
+    <color name="colorGreenCaper">#a8c781</color>
+    <color name="colorBlueSummerSky">#29b6f6</color>
+    <color name="colorSaffron">#fbc02d</color>
+    <color name="colorDeepBlush">#f06292</color>
+    <color name="colortabIndicatorDefault">#EFEFEF</color>
+    <color name="colorRedDeactive">#FBB29C</color>
+    <color name="colorGreenDeactive">#B7DDBA</color>
+
+    <color name="colorBlackPearlAlpha90">#E6141A1D</color>
+    <color name="colorWhiteAlpha90">#E6FFFFFF</color>
+    <color name="colorPriceChartLight">#DFE0E2</color>
+    <color name="colorPriceChartDark">#394246</color>
+    <color name="colorBlackAlpha75">#BF000000</color>
+
+</resources>

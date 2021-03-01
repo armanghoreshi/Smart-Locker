@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/homeFragment">
+    <action
+        android:id="@+id/global_home"
+        app:destination="@id/homeFragment"/>
+
+    <action
+        android:id="@+id/global_assessment"
+        app:destination="@id/assessmentFragment"/>
+
+    <action
+        android:id="@+id/global_account"
+        app:destination="@+id/accountFragment"/>
+    <fragment
+        android:id="@+id/assessmentFragment"
+        android:name="com.example.locker.features.AssessmentFragment"
+        tools:layout="@layout/fragment_assessment"
+        android:label="fragment_assessment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.locker.features.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="fragment_home"
+        app:startDestination="@id/action_homeFragment_to_accountFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_assessmentFragment"
+            app:destination="@id/assessmentFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.locker.features.AccountFragment"
+        tools:layout="@layout/fragment_account"
+        android:label="fragment_account" />
+</navigation>

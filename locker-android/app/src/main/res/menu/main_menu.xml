@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:title="@string/home"
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_home_24px">
+    </item>
+
+    <item
+        android:title="@string/profile"
+        android:id="@+id/menu_acount"
+        android:icon="@drawable/ic_account_box_24px">
+    </item>
+
+<!--    <item-->
+<!--        android:title="@string/assessment"-->
+<!--        android:id="@+id/menu_assessment"-->
+<!--        android:icon="@drawable/ic_assessment_24px">-->
+<!--    </item>-->
+</menu>
