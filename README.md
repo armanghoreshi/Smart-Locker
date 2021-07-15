@@ -1,5 +1,4 @@
 # Smart-Locker
-A smart locker system (HW/SW/APP)
 
 A smart locker system (architecture, design, and implementation) which is a result of working with my team (<a href="https://github.com/mastermobin">Mobin</a>,<a href="https://github.com/hojats7731">Hojat</a>,<a href="https://github.com/Homzzy">Homa</a>, <a href="https://github.com/dibaaminshahidi">Diba</a>).
 
